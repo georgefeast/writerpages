@@ -1,0 +1,39 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 10
+	},
+	"extends": [
+		"airbnb",
+		"prettier",
+		"prettier/react",
+		"plugin:jest-dom/recommended",
+		"plugin:testing-library/react"
+	],
+	"plugins": ["jest-dom", "prettier", "testing-library"],
+	"rules": {
+		"arrow-body-style": ["error", "as-needed"],
+		"curly": ["error", "all"],
+		"import/no-extraneous-dependencies": ["error"],
+		"import/prefer-default-export": 0,
+		"multiline-comment-style": ["error", "starred-block"],
+		"no-console": "error",
+		"no-unused-vars": [
+			"error",
+			{
+				"vars": "all",
+				"args": "after-used"
+			}
+		],
+		"prettier/prettier": "error",
+		"react/jsx-filename-extension": 0,
+		"react/jsx-fragments": ["error", "element"],
+		"react/jsx-props-no-spreading": 0,
+		"react/state-in-constructor": 0,
+		"react/static-property-placement": 0
+	}
+}
