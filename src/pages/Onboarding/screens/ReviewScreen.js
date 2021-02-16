@@ -48,7 +48,7 @@ const ReviewScreen = () => {
 
 	return (
 		<Screen>
-			<Text>What is your role?</Text>
+			<Text>What types of review do you do?</Text>
 			<Box as="form" onSubmit={(e) => e.preventDefault()}>
 				<Flex mb={3}>
 					{checkboxes.map(([key, label]) => (
