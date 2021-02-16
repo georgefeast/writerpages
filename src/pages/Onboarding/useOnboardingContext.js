@@ -58,6 +58,7 @@ export const OnboardingProvider = ({
 			currentScreenIndex: getScreenIndex(screen),
 			goToNextScreen,
 			goToPreviousScreen,
+			goToIndex: setScreen,
 			onValues: mergeFormValues,
 			formValues,
 		}),

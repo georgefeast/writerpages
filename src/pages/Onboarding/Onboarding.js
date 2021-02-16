@@ -1,6 +1,6 @@
 import React from "react";
 import * as R from "ramda";
-import { Box, Flex, Heading } from "theme-ui";
+import { Box, Flex, Button, Heading } from "theme-ui";
 import ReviewScreen from "./screens/ReviewScreen";
 import RoleScreen from "./screens/RoleScreen";
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
@@ -13,14 +13,15 @@ const orderedScreens = {
 const orderedScreenKeys = R.keys(orderedScreens);
 
 const OnboardingFlow = () => {
-	const { currentScreenId } = useOnboarding();
+	const { currentScreenId, goToIndex } = useOnboarding();
 	const CurrentScreen = orderedScreens[currentScreenId];
 
 	return (
 		<Box>
 			<Flex sx={{ justifyContent: "center" }}>
 				{orderedScreenKeys.map((key) => (
-					<Box
+					<Button
+						onClick={() => goToIndex(key)}
 						key={key}
 						sx={{
 							width: "10px",
@@ -28,6 +29,9 @@ const OnboardingFlow = () => {
 							bg: key === currentScreenId ? "black" : "transparent",
 							border: "2px solid black",
 							borderRadius: "100%",
+							p: 0,
+							mx: 1,
+							cursor: "pointer",
 						}}
 					/>
 				))}
