@@ -24,14 +24,14 @@ const OnboardingFlow = () => {
 						onClick={() => goToIndex(key)}
 						key={key}
 						sx={{
+							p: 0,
+							mx: 1,
 							width: "10px",
 							height: "10px",
+							cursor: "pointer",
 							bg: key === currentScreenId ? "black" : "transparent",
 							border: "2px solid black",
 							borderRadius: "100%",
-							p: 0,
-							mx: 1,
-							cursor: "pointer",
 						}}
 					/>
 				))}
