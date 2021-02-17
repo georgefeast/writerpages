@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, Textarea, Flex, Label, Text } from "theme-ui";
+import { Box, Button, Checkbox, Flex, Textarea, Label, Text } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { useOnboarding } from "../useOnboardingContext";
 
-const REVIEW_OPTIONS = {
-	CONFIDENTIALITY: "Confidentiality",
-	CONSTRUCTION: "Construction",
-	CORPORATE_DOCUMENTS: "Corporate documents",
-	DATA_PRIVACY: "Data privacy",
-	DISPUTES: "Disputes",
-	EMPLOYMENT: "Employment",
-	LICENSES: "Licenses",
-	LOANS_AND_FINANCING: "Loans and financing",
-	PROCURMENT_SUPPLY_AND_SERVICES: "Procurement supply and services",
-	PROPERTY_ANY_REAL_ESTATE: "Property and real estate",
-	SALES_AND_PURCHASE: "Sales and purchase",
-	TERMS_AND_CONDITIONS: "Terms and conditions",
+const FRUSTRATIONS_OPTIONS = {
+	FINDING_PARTS_TO_REVIEW: "Finding the parts of the contract I need to review",
+	MISSING_THINGS: "Missing things when reviewing documents",
+	FINDING_WORDING: "Finding the best working when drafting clauses",
+	CHECKING_DEFINITIONS:
+		"Checking definitions and cross references through the document",
+	STANDARDIZING_REVIEWS: "Standardizing reviews according to your playbook",
+	TAKES_TOO_LONG: "It takes too long",
+	NO_JUNIOR_TRAINING_TIME: "No time to train up juniors",
 	OTHER: "Other",
 };
 
-const FIELD_NAME = "review";
+const FIELD_NAME = "frustrations";
 const DETAIL_FIELD_NAME = `${FIELD_NAME}Detail`;
 
 const ReviewScreen = () => {
@@ -45,11 +41,11 @@ const ReviewScreen = () => {
 		onValues(values);
 	}, [onValues, values]);
 
-	const checkboxes = R.toPairs(REVIEW_OPTIONS);
+	const checkboxes = R.toPairs(FRUSTRATIONS_OPTIONS);
 
 	return (
 		<Screen>
-			<Text>What types of review do you do?</Text>
+			<Text>What are your goals for when you use authorDOCS</Text>
 			<Box as="form" onSubmit={(e) => e.preventDefault()}>
 				<Flex mb={3} sx={{ flexDirection: "column" }}>
 					{checkboxes.map(([key, label]) => (

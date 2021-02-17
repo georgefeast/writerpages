@@ -3,11 +3,17 @@ import * as R from "ramda";
 import { Box, Flex, Button, Heading } from "theme-ui";
 import ReviewScreen from "./screens/ReviewScreen";
 import RoleScreen from "./screens/RoleScreen";
+import GoalsScreen from "./screens/GoalsScreen";
+import FrustrationsScreen from "./screens/FrustrationsScreen";
+import TrainingTimeScreen from "./screens/TrainingTimeScreen";
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
 
 const orderedScreens = {
 	ROLE: RoleScreen,
 	REVIEW: ReviewScreen,
+	GOALS: GoalsScreen,
+	FRUSTRATIONS: FrustrationsScreen,
+	TRAINING_TIME: TrainingTimeScreen,
 };
 
 const orderedScreenKeys = R.keys(orderedScreens);

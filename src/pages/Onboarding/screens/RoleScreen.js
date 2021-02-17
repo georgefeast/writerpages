@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, Flex, Label, Text } from "theme-ui";
+import { Box, Button, Checkbox, Flex, Label, Text, Textarea } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { useOnboarding } from "../useOnboardingContext";
 
@@ -16,9 +16,11 @@ const ROLE_OPTIONS = {
 	PARALEGAL: "Paralegal",
 	PROCUREMENT_MANAGER: "Procurement manager",
 	SOLICITOR: "Solicitor",
+	OTHER: "Other",
 };
 
 const FIELD_NAME = "role";
+const DETAIL_FIELD_NAME = `${FIELD_NAME}Detail`;
 
 const RoleScreen = () => {
 	const {
@@ -34,6 +36,7 @@ const RoleScreen = () => {
 		validateOnMount: true,
 		initialValues: {
 			[FIELD_NAME]: initialValue || [],
+			[DETAIL_FIELD_NAME]: "",
 		},
 	});
 
@@ -47,7 +50,7 @@ const RoleScreen = () => {
 		<Screen>
 			<Text>What is your role?</Text>
 			<Box as="form" onSubmit={(e) => e.preventDefault()}>
-				<Flex mb={3}>
+				<Flex mb={3} sx={{ flexDirection: "column" }}>
 					{checkboxes.map(([key, label]) => (
 						<Label key={key}>
 							<Checkbox
@@ -60,6 +63,15 @@ const RoleScreen = () => {
 							{label}
 						</Label>
 					))}
+					{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
+						<Textarea
+							name={DETAIL_FIELD_NAME}
+							onChange={handleChange}
+							onBlur={handleBlur}
+							rows="6"
+							mb={3}
+						/>
+					) : null}
 				</Flex>
 			</Box>
 			<Box>

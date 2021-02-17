@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, Textarea, Flex, Label, Text } from "theme-ui";
+import { Box, Button, Checkbox, Flex, Label, Text } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { useOnboarding } from "../useOnboardingContext";
 
-const REVIEW_OPTIONS = {
-	CONFIDENTIALITY: "Confidentiality",
-	CONSTRUCTION: "Construction",
-	CORPORATE_DOCUMENTS: "Corporate documents",
-	DATA_PRIVACY: "Data privacy",
-	DISPUTES: "Disputes",
-	EMPLOYMENT: "Employment",
-	LICENSES: "Licenses",
-	LOANS_AND_FINANCING: "Loans and financing",
-	PROCURMENT_SUPPLY_AND_SERVICES: "Procurement supply and services",
-	PROPERTY_ANY_REAL_ESTATE: "Property and real estate",
-	SALES_AND_PURCHASE: "Sales and purchase",
-	TERMS_AND_CONDITIONS: "Terms and conditions",
-	OTHER: "Other",
+const GOALS_OPTIONS = {
+	IMPROVE_QUALITY_CONSISTENCY: "Improve quality and consistency of my work",
+	SAVE_TIME: "Save time",
+	REDUCE_RISK: "Reduce risk",
+	ENABLE_WIDER_BUSINESS: "Enable the wider business / organization",
+	DONT_KNOW: "I don't know",
 };
 
-const FIELD_NAME = "review";
-const DETAIL_FIELD_NAME = `${FIELD_NAME}Detail`;
+const FIELD_NAME = "goals";
 
 const ReviewScreen = () => {
 	const {
@@ -45,11 +36,11 @@ const ReviewScreen = () => {
 		onValues(values);
 	}, [onValues, values]);
 
-	const checkboxes = R.toPairs(REVIEW_OPTIONS);
+	const checkboxes = R.toPairs(GOALS_OPTIONS);
 
 	return (
 		<Screen>
-			<Text>What types of review do you do?</Text>
+			<Text>What are your goals for when you use authorDOCS</Text>
 			<Box as="form" onSubmit={(e) => e.preventDefault()}>
 				<Flex mb={3} sx={{ flexDirection: "column" }}>
 					{checkboxes.map(([key, label]) => (
@@ -64,15 +55,6 @@ const ReviewScreen = () => {
 							{label}
 						</Label>
 					))}
-					{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
-						<Textarea
-							name={DETAIL_FIELD_NAME}
-							onChange={handleChange}
-							onBlur={handleBlur}
-							rows="6"
-							mb={3}
-						/>
-					) : null}
 				</Flex>
 			</Box>
 			<Box>
