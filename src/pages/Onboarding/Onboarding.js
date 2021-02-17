@@ -10,7 +10,6 @@ import {
 } from "./screens";
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
 import { screenKeys } from "../../constants/screens";
-import { colorSchemes } from "../../constants/color-schemes";
 import NavigatorDot from "../../components/NavigatorDot";
 
 const orderedScreens = {
@@ -24,15 +23,13 @@ const orderedScreens = {
 const orderedScreenKeys = R.keys(orderedScreens);
 
 const OnboardingFlow = () => {
-	const { currentScreenKey, goToKey, hasCompletedScreen } = useOnboarding();
+	const { currentScreenKey, currentColorScheme, goToKey } = useOnboarding();
 	const CurrentScreen = orderedScreens[currentScreenKey];
-
-	const colorScheme = colorSchemes[currentScreenKey];
 
 	return (
 		<Flex
 			sx={{
-				bg: colorScheme,
+				bg: currentColorScheme,
 				transition: "background-color 500ms ease",
 				minHeight: "100vh",
 				width: "100%",
@@ -57,7 +54,6 @@ const OnboardingFlow = () => {
 						<NavigatorDot
 							key={key}
 							onClick={() => goToKey(key)}
-							isDisabled={!hasCompletedScreen(key)}
 							isActive={key === currentScreenKey}
 							mx={2}
 						/>

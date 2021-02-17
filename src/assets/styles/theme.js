@@ -66,14 +66,14 @@ export default {
 			fontFamily: "heading",
 			fontWeight: "heading",
 			lineHeight: "default",
-			fontSize: [4],
+			fontSize: [3],
 			color: "primary",
 		},
 		headingTiny: {
 			fontFamily: "heading",
 			fontWeight: "heading",
 			lineHeight: "default",
-			fontSize: [3],
+			fontSize: [2],
 			color: "primary",
 		},
 		bodyLarge: {

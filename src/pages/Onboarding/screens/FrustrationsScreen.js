@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Heading, Button, Flex } from "theme-ui";
-import QuestionaireScreenForm from "../../../components/QuestionaireScreenForm";
+import OnboardingScreenForm from "../../../components/OnboardingScreenForm";
 import Screen from "../../../components/Screen";
-import { colorSchemes } from "../../../constants/color-schemes";
 import { FRUSTRATIONS_OPTIONS } from "../../../constants/options";
 import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
@@ -22,10 +21,9 @@ const FrustrationsScreen = () => {
 						What are your frustrations when you are looking at documents?
 					</Heading>
 				</Box>
-				<QuestionaireScreenForm
+				<OnboardingScreenForm
 					screenKey={screenKeys.FRUSTRATIONS}
 					options={FRUSTRATIONS_OPTIONS}
-					colorScheme={colorSchemes.FRUSTRATIONS}
 				/>
 			</Box>
 			<Flex>

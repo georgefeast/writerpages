@@ -6,8 +6,8 @@ import { Box, Flex, Label, Text, Textarea } from "theme-ui";
 import Checkbox from "../Checkbox";
 import { useOnboarding } from "../../pages/Onboarding/useOnboardingContext";
 
-const QuestionaireScreenForm = ({ screenKey, options, colorScheme }) => {
-	const { formValues, onValues } = useOnboarding();
+const OnboardingScreenForm = ({ screenKey, options }) => {
+	const { formValues, onValues, currentColorScheme } = useOnboarding();
 
 	const detailFieldName = `${screenKey}_DETAIL`;
 	const acceptsOther = R.compose(R.indexOf("OTHER"), R.keys)(options);
@@ -31,16 +31,16 @@ const QuestionaireScreenForm = ({ screenKey, options, colorScheme }) => {
 	return (
 		<Box as="form" onSubmit={(e) => e.preventDefault()}>
 			<Flex mb={3} sx={{ flexDirection: "column" }}>
-				{checkboxes.map(([key, label]) =>
-					key === "OTHER" ? (
-						<Label key={key}>
+				{checkboxes.map(([key, label]) => (
+					<Label key={key} mb={1}>
+						{key === "OTHER" ? (
 							<Checkbox
 								name={screenKey}
 								value={key}
 								checked={values[screenKey].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-								scheme={colorScheme}
+								scheme={currentColorScheme}
 							>
 								{values[screenKey].indexOf("OTHER") > -1 ? (
 									<Textarea
@@ -56,35 +56,28 @@ const QuestionaireScreenForm = ({ screenKey, options, colorScheme }) => {
 									<Text color="inherit">Other</Text>
 								)}
 							</Checkbox>
-						</Label>
-					) : (
-						<Label key={key}>
+						) : (
 							<Checkbox
 								name={screenKey}
 								value={key}
 								checked={values[screenKey].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-								scheme={colorScheme}
+								scheme={currentColorScheme}
 							>
 								<Text color="inherit">{label}</Text>
 							</Checkbox>
-						</Label>
-					),
-				)}
+						)}
+					</Label>
+				))}
 			</Flex>
 		</Box>
 	);
 };
 
-QuestionaireScreenForm.defaultProps = {
-	colorScheme: "schemeA",
-};
-
-QuestionaireScreenForm.propTypes = {
+OnboardingScreenForm.propTypes = {
 	screenKey: PropTypes.string.isRequired,
 	options: PropTypes.shape().isRequired,
-	colorScheme: PropTypes.string,
 };
 
-export default QuestionaireScreenForm;
+export default OnboardingScreenForm;

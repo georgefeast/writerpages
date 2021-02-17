@@ -1,13 +1,14 @@
 import React from "react";
 import { Box, Heading, Button, Flex } from "theme-ui";
 import Screen from "../../../components/Screen";
-import { colorSchemes } from "../../../constants/color-schemes";
 import { useOnboarding } from "../useOnboardingContext";
 
 const TrainingTimeScreen = () => {
-	const { formValues, goToPreviousScreen } = useOnboarding();
-
-	const COLOR_SCHEME = colorSchemes.TRAINING_TIME;
+	const {
+		formValues,
+		goToPreviousScreen,
+		currentColorScheme,
+	} = useOnboarding();
 
 	const handleSubmit = () => {
 		const { log } = console;
@@ -25,7 +26,7 @@ const TrainingTimeScreen = () => {
 				</Box>
 				<Button
 					variant="smallButton"
-					sx={{ bg: "primary", color: COLOR_SCHEME, fontSize: 2 }}
+					sx={{ bg: "primary", color: currentColorScheme, fontSize: 2 }}
 				>
 					Book a training time
 				</Button>

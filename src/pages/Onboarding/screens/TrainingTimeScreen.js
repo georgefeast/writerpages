@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Box, Heading, Text, Button, Flex } from "theme-ui";
 import Screen from "../../../components/Screen";
-import { colorSchemes } from "../../../constants/color-schemes";
 import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
 
 const TrainingTimeScreen = () => {
-	const { formValues, goToPreviousScreen } = useOnboarding();
-
-	const COLOR_SCHEME = colorSchemes.TRAINING_TIME;
+	const {
+		formValues,
+		goToPreviousScreen,
+		currentColorScheme,
+	} = useOnboarding();
 
 	const handleSubmit = () => {
 		const reqVariables = {
@@ -40,7 +41,7 @@ const TrainingTimeScreen = () => {
 					href="https://www.onit.com/schedule-a-demo/"
 					target="_blank"
 					variant="smallButton"
-					sx={{ bg: "primary", color: COLOR_SCHEME, fontSize: 2 }}
+					sx={{ bg: "primary", color: currentColorScheme, fontSize: 2 }}
 				>
 					<FontAwesomeIcon icon={faCalendarAlt} />
 					<Text as="span" ml={2}>

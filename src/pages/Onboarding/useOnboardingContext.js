@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import * as R from "ramda";
 import PropTypes from "prop-types";
+import { colorSchemes } from "../../constants/color-schemes";
 
 const onboardingContext = createContext();
 
@@ -46,7 +47,23 @@ export const OnboardingProvider = ({
 		[formValues],
 	);
 
+	const currentColorScheme = colorSchemes[screen];
+
 	const hasCompletedCurrentScreen = hasCompletedScreen(screen);
+
+	const goToKey = useCallback(
+		(targetScreenKey) => {
+			const currentScreenIndex = getScreenIndex(screen);
+			const targetScreenIndex = getScreenIndex(targetScreenKey);
+			if (
+				targetScreenIndex < currentScreenIndex ||
+				hasCompletedScreen(targetScreenKey)
+			) {
+				setScreen(targetScreenKey);
+			}
+		},
+		[hasCompletedScreen, getScreenIndex, screen],
+	);
 
 	const goToNextScreen = useCallback(() => {
 		const currentScreenIndex = getScreenIndex(screen);
@@ -74,21 +91,21 @@ export const OnboardingProvider = ({
 			currentScreenKey: screen,
 			goToNextScreen,
 			goToPreviousScreen,
-			goToKey: setScreen,
+			goToKey,
 			onValues: mergeFormValues,
 			formValues,
 			hasCompletedCurrentScreen,
-			hasCompletedScreen,
+			currentColorScheme,
 		}),
 		[
 			screen,
 			formValues,
 			goToNextScreen,
 			goToPreviousScreen,
+			goToKey,
 			mergeFormValues,
-			getScreenIndex,
 			hasCompletedCurrentScreen,
-			hasCompletedScreen,
+			currentColorScheme,
 		],
 	);
 

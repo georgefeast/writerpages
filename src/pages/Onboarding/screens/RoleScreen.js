@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Heading, Button, Flex } from "theme-ui";
-import QuestionaireScreenForm from "../../../components/QuestionaireScreenForm";
+import OnboardingScreenForm from "../../../components/OnboardingScreenForm";
 import Screen from "../../../components/Screen";
-import { colorSchemes } from "../../../constants/color-schemes";
 import { ROLE_OPTIONS } from "../../../constants/options";
 import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
@@ -18,10 +17,9 @@ const RoleScreen = () => {
 						What is your role?
 					</Heading>
 				</Box>
-				<QuestionaireScreenForm
+				<OnboardingScreenForm
 					screenKey={screenKeys.ROLE}
 					options={ROLE_OPTIONS}
-					colorScheme={colorSchemes.ROLE}
 				/>
 			</Box>
 			<Flex>
