@@ -4,8 +4,8 @@
 	"display": "browser",
 	"scope": "/",
 	"start_url": "/",
-	"app_name": "authorDOCS",
-	"short_name": "authorDOCS",
+	"app_name": "writerPAGES",
+	"short_name": "writerPAGES",
 	"icons": [
 		{
 			"src": "/icon-192x192.png",

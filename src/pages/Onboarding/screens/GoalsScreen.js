@@ -18,7 +18,7 @@ const GoalsScreen = () => {
 			<Box>
 				<Box sx={{ py: 3 }}>
 					<Heading as="h2" variant="headingSmall">
-						What are you goals for when you use authorDOCS?
+						What are you goals for when you use writerPAGES?
 					</Heading>
 				</Box>
 				<OnboardingScreenForm

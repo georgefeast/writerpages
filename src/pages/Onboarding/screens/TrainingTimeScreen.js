@@ -32,7 +32,7 @@ const TrainingTimeScreen = () => {
 			<Box>
 				<Box sx={{ py: 3 }}>
 					<Heading as="h2" variant="headingSmall">
-						Would you like one of our authorDOCS experts to assist you with a
+						Would you like one of our writerPAGES experts to assist you with a
 						training session?
 					</Heading>
 				</Box>
