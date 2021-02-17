@@ -22,10 +22,14 @@ const NavigatorDot = ({ onClick, isDisabled, isActive, ...rest }) => (
 	/>
 );
 
+NavigatorDot.defaultProps = {
+	isDisabled: false,
+};
+
 NavigatorDot.propTypes = {
 	onClick: PropTypes.func.isRequired,
-	isDisabled: PropTypes.bool.isRequired,
 	isActive: PropTypes.bool.isRequired,
+	isDisabled: PropTypes.bool,
 };
 
 export default NavigatorDot;
