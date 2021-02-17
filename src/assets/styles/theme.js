@@ -3,8 +3,8 @@ const breakpoints = ["40em", "52em", "64em"];
 export default {
 	useBorderBox: true,
 	colors: {
-		text: "#fff",
 		primary: "#fff",
+		secondary: "#222",
 		highlight: "rgba(255,255,255,0.3)",
 		schemeA: "#343fb6",
 		schemeB: "#9c6ade",

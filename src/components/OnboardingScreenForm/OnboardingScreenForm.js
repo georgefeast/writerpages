@@ -51,6 +51,7 @@ const OnboardingScreenForm = ({ screenKey, options }) => {
 										onBlur={handleBlur}
 										rows="6"
 										mb={3}
+										sx={{ color: "secondary" }}
 									/>
 								) : (
 									<Text color="inherit">Other</Text>
