@@ -4,10 +4,15 @@ import QuestionaireScreenForm from "../../../components/QuestionaireScreenForm";
 import Screen from "../../../components/Screen";
 import { colorSchemes } from "../../../constants/color-schemes";
 import { REVIEW_OPTIONS } from "../../../constants/options";
+import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
 
 const ReviewScreen = () => {
-	const { goToNextScreen, goToPreviousScreen } = useOnboarding();
+	const {
+		goToNextScreen,
+		goToPreviousScreen,
+		hasCompletedCurrentScreen,
+	} = useOnboarding();
 
 	return (
 		<Screen>
@@ -17,12 +22,12 @@ const ReviewScreen = () => {
 						What types of review do you do?
 					</Heading>
 				</Box>
+				<QuestionaireScreenForm
+					screenKey={screenKeys.REVIEW}
+					options={REVIEW_OPTIONS}
+					colorScheme={colorSchemes.REVIEW}
+				/>
 			</Box>
-			<QuestionaireScreenForm
-				fieldName="review"
-				options={REVIEW_OPTIONS}
-				colorScheme={colorSchemes.REVIEW}
-			/>
 			<Flex>
 				<Button
 					variant="mediumGhost"
@@ -35,6 +40,7 @@ const ReviewScreen = () => {
 					variant="mediumGhost"
 					sx={{ width: "50%" }}
 					onClick={goToNextScreen}
+					disabled={!hasCompletedCurrentScreen}
 				>
 					Next
 				</Button>

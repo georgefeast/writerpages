@@ -28,11 +28,11 @@ export const OnboardingProvider = ({
 	...rest
 }) => {
 	const getScreenIndex = useCallback(
-		(screenId) => orderedScreenKeys.indexOf(screenId),
+		(screenKey) => orderedScreenKeys.indexOf(screenKey),
 		[orderedScreenKeys],
 	);
 
-	const getScreenIdByIndex = useCallback(
+	const getScreenKeyByIndex = useCallback(
 		(screenIndex) => orderedScreenKeys[screenIndex],
 		[orderedScreenKeys],
 	);
@@ -40,21 +40,29 @@ export const OnboardingProvider = ({
 	const [screen, setScreen] = useState(orderedScreenKeys[0]);
 	const [formValues, setFormValues] = useState({});
 
+	const hasCompletedScreen = useCallback(
+		(screenKey) =>
+			Boolean(formValues[screenKey] && formValues[screenKey].length),
+		[formValues],
+	);
+
+	const hasCompletedCurrentScreen = hasCompletedScreen(screen);
+
 	const goToNextScreen = useCallback(() => {
 		const currentScreenIndex = getScreenIndex(screen);
-		const nextScreenId = getScreenIdByIndex(currentScreenIndex + 1);
-		if (nextScreenId) {
-			setScreen(nextScreenId);
+		const nextScreenKey = getScreenKeyByIndex(currentScreenIndex + 1);
+		if (nextScreenKey && hasCompletedCurrentScreen) {
+			setScreen(nextScreenKey);
 		}
-	}, [getScreenIdByIndex, getScreenIndex, screen]);
+	}, [getScreenKeyByIndex, hasCompletedCurrentScreen, getScreenIndex, screen]);
 
 	const goToPreviousScreen = useCallback(() => {
 		const currentScreenIndex = getScreenIndex(screen);
-		const previousScreenId = getScreenIdByIndex(currentScreenIndex - 1);
-		if (previousScreenId) {
-			setScreen(previousScreenId);
+		const previousScreenKey = getScreenKeyByIndex(currentScreenIndex - 1);
+		if (previousScreenKey) {
+			setScreen(previousScreenKey);
 		}
-	}, [getScreenIdByIndex, getScreenIndex, screen]);
+	}, [getScreenKeyByIndex, getScreenIndex, screen]);
 
 	const mergeFormValues = useCallback(
 		R.compose(setFormValues, R.mergeLeft),
@@ -63,13 +71,15 @@ export const OnboardingProvider = ({
 
 	const value = useMemo(
 		() => ({
-			currentScreenId: screen,
+			currentScreenKey: screen,
 			currentScreenIndex: getScreenIndex(screen),
 			goToNextScreen,
 			goToPreviousScreen,
-			goToIndex: setScreen,
+			goToKey: setScreen,
 			onValues: mergeFormValues,
 			formValues,
+			hasCompletedCurrentScreen,
+			hasCompletedScreen,
 		}),
 		[
 			screen,
@@ -78,6 +88,8 @@ export const OnboardingProvider = ({
 			goToPreviousScreen,
 			mergeFormValues,
 			getScreenIndex,
+			hasCompletedCurrentScreen,
+			hasCompletedScreen,
 		],
 	);
 

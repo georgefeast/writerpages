@@ -10,7 +10,8 @@ const TrainingTimeScreen = () => {
 	const COLOR_SCHEME = colorSchemes.TRAINING_TIME;
 
 	const handleSubmit = () => {
-		alert(JSON.stringify(formValues));
+		const { log } = console;
+		log(formValues);
 	};
 
 	return (
@@ -23,9 +24,6 @@ const TrainingTimeScreen = () => {
 					</Heading>
 				</Box>
 				<Button
-					as="a"
-					href="https://www.onit.com/schedule-a-demo/"
-					target="_blank"
 					variant="smallButton"
 					sx={{ bg: "primary", color: COLOR_SCHEME, fontSize: 2 }}
 				>

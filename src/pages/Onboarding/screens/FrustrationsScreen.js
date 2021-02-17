@@ -4,10 +4,15 @@ import QuestionaireScreenForm from "../../../components/QuestionaireScreenForm";
 import Screen from "../../../components/Screen";
 import { colorSchemes } from "../../../constants/color-schemes";
 import { FRUSTRATIONS_OPTIONS } from "../../../constants/options";
+import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
 
 const FrustrationsScreen = () => {
-	const { goToNextScreen, goToPreviousScreen } = useOnboarding();
+	const {
+		goToNextScreen,
+		goToPreviousScreen,
+		hasCompletedCurrentScreen,
+	} = useOnboarding();
 
 	return (
 		<Screen>
@@ -17,12 +22,12 @@ const FrustrationsScreen = () => {
 						What are your frustrations when you are looking at documents?
 					</Heading>
 				</Box>
+				<QuestionaireScreenForm
+					screenKey={screenKeys.FRUSTRATIONS}
+					options={FRUSTRATIONS_OPTIONS}
+					colorScheme={colorSchemes.FRUSTRATIONS}
+				/>
 			</Box>
-			<QuestionaireScreenForm
-				fieldName="frustrations"
-				options={FRUSTRATIONS_OPTIONS}
-				colorScheme={colorSchemes.FRUSTRATIONS}
-			/>
 			<Flex>
 				<Button
 					variant="mediumGhost"
@@ -35,6 +40,7 @@ const FrustrationsScreen = () => {
 					variant="mediumGhost"
 					sx={{ width: "50%" }}
 					onClick={goToNextScreen}
+					disabled={!hasCompletedCurrentScreen}
 				>
 					Next
 				</Button>

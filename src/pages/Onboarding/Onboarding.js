@@ -1,6 +1,6 @@
 import React from "react";
 import * as R from "ramda";
-import { Box, Flex, Button, Heading } from "theme-ui";
+import { Box, Flex, Heading } from "theme-ui";
 import {
 	ReviewScreen,
 	RoleScreen,
@@ -11,6 +11,7 @@ import {
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
 import { screenKeys } from "../../constants/screens";
 import { colorSchemes } from "../../constants/color-schemes";
+import NavigatorDot from "../../components/NavigatorDot";
 
 const orderedScreens = {
 	[screenKeys.ROLE]: RoleScreen,
@@ -23,10 +24,10 @@ const orderedScreens = {
 const orderedScreenKeys = R.keys(orderedScreens);
 
 const OnboardingFlow = () => {
-	const { currentScreenId, goToIndex } = useOnboarding();
-	const CurrentScreen = orderedScreens[currentScreenId];
+	const { currentScreenKey, goToKey, hasCompletedScreen } = useOnboarding();
+	const CurrentScreen = orderedScreens[currentScreenKey];
 
-	const colorScheme = colorSchemes[currentScreenId];
+	const colorScheme = colorSchemes[currentScreenKey];
 
 	return (
 		<Flex
@@ -53,24 +54,19 @@ const OnboardingFlow = () => {
 			>
 				<Flex sx={{ justifyContent: "center", mb: 4 }}>
 					{orderedScreenKeys.map((key) => (
-						<Button
-							onClick={() => goToIndex(key)}
+						<NavigatorDot
 							key={key}
-							sx={{
-								p: 0,
-								mx: 1,
-								width: "10px",
-								height: "10px",
-								cursor: "pointer",
-								bg: key === currentScreenId ? "white" : "transparent",
-								border: "2px solid white",
-								borderRadius: "100%",
-							}}
+							onClick={() => goToKey(key)}
+							isDisabled={!hasCompletedScreen(key)}
+							isActive={key === currentScreenKey}
+							mx={2}
 						/>
 					))}
 				</Flex>
 				<Box sx={{ textAlign: "center" }}>
-					<Heading color="white">Welcome</Heading>
+					<Heading variant="headingLarge" color="white">
+						Welcome
+					</Heading>
 				</Box>
 				<CurrentScreen />
 			</Flex>

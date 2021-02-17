@@ -4,10 +4,11 @@ import QuestionaireScreenForm from "../../../components/QuestionaireScreenForm";
 import Screen from "../../../components/Screen";
 import { colorSchemes } from "../../../constants/color-schemes";
 import { ROLE_OPTIONS } from "../../../constants/options";
+import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
 
 const RoleScreen = () => {
-	const { goToNextScreen } = useOnboarding();
+	const { goToNextScreen, hasCompletedCurrentScreen } = useOnboarding();
 
 	return (
 		<Screen>
@@ -17,17 +18,18 @@ const RoleScreen = () => {
 						What is your role?
 					</Heading>
 				</Box>
+				<QuestionaireScreenForm
+					screenKey={screenKeys.ROLE}
+					options={ROLE_OPTIONS}
+					colorScheme={colorSchemes.ROLE}
+				/>
 			</Box>
-			<QuestionaireScreenForm
-				fieldName="role"
-				options={ROLE_OPTIONS}
-				colorScheme={colorSchemes.ROLE}
-			/>
 			<Flex>
 				<Button
 					variant="mediumGhost"
 					sx={{ width: "100%" }}
 					onClick={goToNextScreen}
+					disabled={!hasCompletedCurrentScreen}
 				>
 					Next
 				</Button>

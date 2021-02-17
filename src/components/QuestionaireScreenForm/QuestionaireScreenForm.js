@@ -6,18 +6,18 @@ import { Box, Flex, Label, Text, Textarea } from "theme-ui";
 import Checkbox from "../Checkbox";
 import { useOnboarding } from "../../pages/Onboarding/useOnboardingContext";
 
-const QuestionaireScreenForm = ({ fieldName, options, colorScheme }) => {
+const QuestionaireScreenForm = ({ screenKey, options, colorScheme }) => {
 	const { formValues, onValues } = useOnboarding();
 
-	const detailFieldName = `${fieldName}Detail`;
+	const detailFieldName = `${screenKey}_DETAIL`;
 	const acceptsOther = R.compose(R.indexOf("OTHER"), R.keys)(options);
 
-	const [initialValue] = useState(formValues[fieldName]);
+	const [initialValue] = useState(formValues[screenKey]);
 
 	const { values, handleBlur, handleChange } = useFormik({
 		validateOnMount: true,
 		initialValues: {
-			[fieldName]: initialValue || [],
+			[screenKey]: initialValue || [],
 			...(acceptsOther ? { [detailFieldName]: "" } : {}),
 		},
 	});
@@ -35,14 +35,14 @@ const QuestionaireScreenForm = ({ fieldName, options, colorScheme }) => {
 					key === "OTHER" ? (
 						<Label key={key}>
 							<Checkbox
-								name={fieldName}
+								name={screenKey}
 								value={key}
-								checked={values[fieldName].indexOf(key) > -1}
+								checked={values[screenKey].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
 								scheme={colorScheme}
 							>
-								{values[fieldName].indexOf("OTHER") > -1 ? (
+								{values[screenKey].indexOf("OTHER") > -1 ? (
 									<Textarea
 										name={detailFieldName}
 										autoFocus
@@ -60,9 +60,9 @@ const QuestionaireScreenForm = ({ fieldName, options, colorScheme }) => {
 					) : (
 						<Label key={key}>
 							<Checkbox
-								name={fieldName}
+								name={screenKey}
 								value={key}
-								checked={values[fieldName].indexOf(key) > -1}
+								checked={values[screenKey].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
 								scheme={colorScheme}
@@ -82,7 +82,7 @@ QuestionaireScreenForm.defaultProps = {
 };
 
 QuestionaireScreenForm.propTypes = {
-	fieldName: PropTypes.string.isRequired,
+	screenKey: PropTypes.string.isRequired,
 	options: PropTypes.shape().isRequired,
 	colorScheme: PropTypes.string,
 };
