@@ -27,8 +27,17 @@ export const OnboardingProvider = ({
 	orderedScreenKeys,
 	...rest
 }) => {
-	const getScreenIndex = (screenId) => orderedScreenKeys.indexOf(screenId);
-	const getScreenIdByIndex = (screenIndex) => orderedScreenKeys[screenIndex];
+	const getScreenIndex = useCallback(
+		(screenId) => {
+			orderedScreenKeys.indexOf(screenId);
+		},
+		[orderedScreenKeys],
+	);
+
+	const getScreenIdByIndex = useCallback(
+		(screenIndex) => orderedScreenKeys[screenIndex],
+		[orderedScreenKeys],
+	);
 
 	const [screen, setScreen] = useState(orderedScreenKeys[0]);
 	const [formValues, setFormValues] = useState({});
@@ -38,14 +47,14 @@ export const OnboardingProvider = ({
 		if (nextScreenId) {
 			setScreen(nextScreenId);
 		}
-	}, [getScreenIdByIndex]);
+	}, [getScreenIdByIndex, getScreenIndex, screen]);
 
 	const goToPreviousScreen = useCallback(() => {
 		const previousScreenId = getScreenIdByIndex(getScreenIndex(screen) - 1);
 		if (previousScreenId) {
 			setScreen(previousScreenId);
 		}
-	}, [getScreenIdByIndex]);
+	}, [getScreenIdByIndex, getScreenIndex, screen]);
 
 	const mergeFormValues = useCallback(
 		R.compose(setFormValues, R.mergeLeft),
@@ -62,7 +71,14 @@ export const OnboardingProvider = ({
 			onValues: mergeFormValues,
 			formValues,
 		}),
-		[screen, formValues],
+		[
+			screen,
+			formValues,
+			goToNextScreen,
+			goToPreviousScreen,
+			mergeFormValues,
+			getScreenIndex,
+		],
 	);
 
 	return (

@@ -3,20 +3,16 @@ const breakpoints = ["40em", "52em", "64em"];
 export default {
 	useBorderBox: true,
 	colors: {
-		text: "#3A3A3A",
-		background: "#F5F5F5",
-		highlight: "#FFFFFF",
-		muted: "#e6e6e6",
-		primary: "#000000",
-		accent: "#1D56E9",
-		secondary: "#173B96",
+		text: "#fff",
+		primary: "#fff",
+		highlight: "rgba(255,255,255,0.3)",
 	},
 	breakpoints,
 	fonts: {
 		body:
-			'Inconsolata, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
+			'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
 		heading:
-			'"Helvetica Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
+			'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
 		monospace: "Menlo, monospace",
 	},
 	shadows: {
@@ -183,16 +179,15 @@ export default {
 			py: 1,
 			cursor: "pointer",
 			transition: "background-color ease 200ms",
-			color: "accent",
-			borderRadius: "30px",
+			color: "primary",
 			lineHeight: "default",
 			bg: "transparent",
 			"&:hover": {
-				bg: "accent",
-				color: "highlight",
+				bg: "highlight",
+				color: "primary",
 			},
 			border: "1px solid",
-			borderColor: "accent",
+			borderColor: "primary",
 		},
 		icon: {
 			cursor: "pointer",

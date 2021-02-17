@@ -23,27 +23,31 @@ const OnboardingFlow = () => {
 	const CurrentScreen = orderedScreens[currentScreenId];
 
 	return (
-		<Box>
-			<Flex sx={{ justifyContent: "center" }}>
-				{orderedScreenKeys.map((key) => (
-					<Button
-						onClick={() => goToIndex(key)}
-						key={key}
-						sx={{
-							p: 0,
-							mx: 1,
-							width: "10px",
-							height: "10px",
-							cursor: "pointer",
-							bg: key === currentScreenId ? "black" : "transparent",
-							border: "2px solid black",
-							borderRadius: "100%",
-						}}
-					/>
-				))}
-			</Flex>
-			<Heading>Welcome</Heading>
-			<CurrentScreen />
+		<Box sx={{ bg: "#1a7ace" }}>
+			<Box sx={{ maxWidth: "600px", mx: "auto", px: 5, py: 6 }}>
+				<Flex sx={{ justifyContent: "center", mb: 4 }}>
+					{orderedScreenKeys.map((key) => (
+						<Button
+							onClick={() => goToIndex(key)}
+							key={key}
+							sx={{
+								p: 0,
+								mx: 1,
+								width: "10px",
+								height: "10px",
+								cursor: "pointer",
+								bg: key === currentScreenId ? "white" : "transparent",
+								border: "2px solid white",
+								borderRadius: "100%",
+							}}
+						/>
+					))}
+				</Flex>
+				<Box sx={{ textAlign: "center" }}>
+					<Heading color="white">Welcome</Heading>
+				</Box>
+				<CurrentScreen />
+			</Box>
 		</Box>
 	);
 };

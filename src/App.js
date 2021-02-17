@@ -1,4 +1,5 @@
 import React from "react";
+import "typeface-roboto";
 import { ThemeProvider } from "theme-ui";
 import theme from "./assets/styles/theme";
 import "./assets/styles/base.css";

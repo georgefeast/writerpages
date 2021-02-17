@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, Flex, Label, Text, Textarea } from "theme-ui";
+import { Box, Button, Flex, Label, Text, Textarea } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { useOnboarding } from "../useOnboardingContext";
+import Checkbox from "../../../components/Checkbox";
 
 const ROLE_OPTIONS = {
 	CONTRACTS_MANAGER: "Contracts manager",
@@ -16,7 +17,6 @@ const ROLE_OPTIONS = {
 	PARALEGAL: "Paralegal",
 	PROCUREMENT_MANAGER: "Procurement manager",
 	SOLICITOR: "Solicitor",
-	OTHER: "Other",
 };
 
 const FIELD_NAME = "role";
@@ -59,25 +59,44 @@ const RoleScreen = () => {
 								checked={values[FIELD_NAME].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-							/>
-							{label}
+							>
+								<Text color="inherit">{label}</Text>
+							</Checkbox>
 						</Label>
 					))}
-					{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
-						<Textarea
-							name={DETAIL_FIELD_NAME}
-							onChange={handleChange}
+					<Label key="OTHER">
+						<Checkbox
+							name={FIELD_NAME}
+							value="OTHER"
+							checked={values[FIELD_NAME].indexOf("OTHER") > -1}
 							onBlur={handleBlur}
-							rows="6"
-							mb={3}
-						/>
-					) : null}
+							onChange={handleChange}
+						>
+							{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
+								<Textarea
+									name={DETAIL_FIELD_NAME}
+									autoFocus
+									placeholder="Please give more detail about your role"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									rows="6"
+									mb={3}
+								/>
+							) : (
+								<Text color="inherit">Other</Text>
+							)}
+						</Checkbox>
+					</Label>
 				</Flex>
 			</Box>
-			<Box>
-				<Button onClick={goToPreviousScreen}>Back</Button>
-				<Button onClick={goToNextScreen}>Next</Button>
-			</Box>
+			<Flex>
+				<Button variant="mediumGhost" onClick={goToPreviousScreen}>
+					Back
+				</Button>
+				<Button variant="mediumGhost" onClick={goToNextScreen}>
+					Next
+				</Button>
+			</Flex>
 		</Screen>
 	);
 };
