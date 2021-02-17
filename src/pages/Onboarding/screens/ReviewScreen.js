@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, Textarea, Flex, Label, Text } from "theme-ui";
+import { Box, Heading, Button, Flex, Label, Text, Textarea } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { useOnboarding } from "../useOnboardingContext";
-
-const REVIEW_OPTIONS = {
-	CONFIDENTIALITY: "Confidentiality",
-	CONSTRUCTION: "Construction",
-	CORPORATE_DOCUMENTS: "Corporate documents",
-	DATA_PRIVACY: "Data privacy",
-	DISPUTES: "Disputes",
-	EMPLOYMENT: "Employment",
-	LICENSES: "Licenses",
-	LOANS_AND_FINANCING: "Loans and financing",
-	PROCURMENT_SUPPLY_AND_SERVICES: "Procurement supply and services",
-	PROPERTY_ANY_REAL_ESTATE: "Property and real estate",
-	SALES_AND_PURCHASE: "Sales and purchase",
-	TERMS_AND_CONDITIONS: "Terms and conditions",
-	OTHER: "Other",
-};
+import Checkbox from "../../../components/Checkbox";
+import { colorSchemes } from "../../../constants/color-schemes";
+import { REVIEW_OPTIONS } from "../../../constants/options";
 
 const FIELD_NAME = "review";
 const DETAIL_FIELD_NAME = `${FIELD_NAME}Detail`;
+const COLOR_SCHEME = colorSchemes.REVIEW;
 
 const ReviewScreen = () => {
 	const {
@@ -38,6 +26,7 @@ const ReviewScreen = () => {
 		validateOnMount: true,
 		initialValues: {
 			[FIELD_NAME]: initialValue || [],
+			[DETAIL_FIELD_NAME]: "",
 		},
 	});
 
@@ -49,7 +38,11 @@ const ReviewScreen = () => {
 
 	return (
 		<Screen>
-			<Text>What types of review do you do?</Text>
+			<Box sx={{ py: 3 }}>
+				<Heading as="h2" variant="headingSmall">
+					What types of review do you do?
+				</Heading>
+			</Box>
 			<Box as="form" onSubmit={(e) => e.preventDefault()}>
 				<Flex mb={3} sx={{ flexDirection: "column" }}>
 					{checkboxes.map(([key, label]) => (
@@ -60,25 +53,54 @@ const ReviewScreen = () => {
 								checked={values[FIELD_NAME].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-							/>
-							{label}
+								scheme={COLOR_SCHEME}
+							>
+								<Text color="inherit">{label}</Text>
+							</Checkbox>
 						</Label>
 					))}
-					{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
-						<Textarea
-							name={DETAIL_FIELD_NAME}
-							onChange={handleChange}
+					<Label key="OTHER">
+						<Checkbox
+							name={FIELD_NAME}
+							value="OTHER"
+							checked={values[FIELD_NAME].indexOf("OTHER") > -1}
 							onBlur={handleBlur}
-							rows="6"
-							mb={3}
-						/>
-					) : null}
+							onChange={handleChange}
+							scheme={COLOR_SCHEME}
+						>
+							{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
+								<Textarea
+									name={DETAIL_FIELD_NAME}
+									autoFocus
+									placeholder="Please give more detail"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									rows="6"
+									mb={3}
+								/>
+							) : (
+								<Text color="inherit">Other</Text>
+							)}
+						</Checkbox>
+					</Label>
 				</Flex>
 			</Box>
-			<Box>
-				<Button onClick={goToPreviousScreen}>Back</Button>
-				<Button onClick={goToNextScreen}>Next</Button>
-			</Box>
+			<Flex>
+				<Button
+					variant="mediumGhost"
+					sx={{ width: "50%", mr: 3 }}
+					onClick={goToPreviousScreen}
+				>
+					Back
+				</Button>
+				<Button
+					variant="mediumGhost"
+					sx={{ width: "50%" }}
+					onClick={goToNextScreen}
+				>
+					Next
+				</Button>
+			</Flex>
 		</Screen>
 	);
 };

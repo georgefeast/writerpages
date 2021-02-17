@@ -6,6 +6,10 @@ export default {
 		text: "#fff",
 		primary: "#fff",
 		highlight: "rgba(255,255,255,0.3)",
+		schemeA: "#343fb6",
+		schemeB: "#9c6ade",
+		schemeC: "#017ace",
+		schemeD: "#12c39a",
 	},
 	breakpoints,
 	fonts: {
@@ -26,7 +30,7 @@ export default {
 	fontWeights: {
 		light: 300,
 		body: 400,
-		heading: 600,
+		heading: 500,
 		bold: 700,
 	},
 	lineHeights: {
@@ -56,23 +60,23 @@ export default {
 	text: {
 		headingLarge: {
 			fontFamily: "heading",
-			fontWeight: "bold",
+			fontWeight: "heading",
 			lineHeight: "condensed",
-			fontSize: [8],
+			fontSize: [6],
 			color: "primary",
 		},
 		headingMedium: {
 			fontFamily: "heading",
-			fontWeight: "bold",
+			fontWeight: "heading",
 			lineHeight: "condensed",
-			fontSize: [7],
+			fontSize: [5],
 			color: "primary",
 		},
 		headingSmall: {
 			fontFamily: "heading",
-			fontWeight: "bold",
+			fontWeight: "heading",
 			lineHeight: "default",
-			fontSize: [5],
+			fontSize: [4],
 			color: "primary",
 		},
 		headingTiny: {
@@ -86,21 +90,21 @@ export default {
 			fontFamily: "body",
 			fontWeight: "body",
 			lineHeight: "default",
-			fontSize: [5],
+			fontSize: [4],
 			color: "text",
 		},
 		bodyDefault: {
 			fontFamily: "body",
 			fontWeight: "body",
 			lineHeight: "default",
-			fontSize: [4],
+			fontSize: [3],
 			color: "text",
 		},
 		bodySmall: {
 			fontFamily: "body",
 			fontWeight: "body",
 			lineHeight: "default",
-			fontSize: [3],
+			fontSize: [2],
 			color: "text",
 		},
 	},
@@ -152,26 +156,11 @@ export default {
 			borderRadius: 0,
 		},
 		small: {
-			fontSize: 1,
-			py: "2px",
+			p: 1,
 			height: "24px",
-			bg: "primary",
 			cursor: "pointer",
 			"&:disabled": {
-				backgroundColor: "secondary",
-			},
-		},
-		smallGhost: {
-			fontSize: 1,
-			py: "2px",
-			height: "24px",
-			bg: "muted",
-			cursor: "pointer",
-			color: "muted",
-			backgroundColor: "transparent",
-			border: "1px solid",
-			"&:disabled": {
-				backgroundColor: "secondary",
+				opacity: 0.3,
 			},
 		},
 		mediumGhost: {
@@ -181,6 +170,7 @@ export default {
 			transition: "background-color ease 200ms",
 			color: "primary",
 			lineHeight: "default",
+			borderRadius: "3px",
 			bg: "transparent",
 			"&:hover": {
 				bg: "highlight",
@@ -188,6 +178,9 @@ export default {
 			},
 			border: "1px solid",
 			borderColor: "primary",
+			"&:disabled": {
+				opacity: 0.3,
+			},
 		},
 		icon: {
 			cursor: "pointer",

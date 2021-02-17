@@ -1,10 +1,13 @@
 import React from "react";
-import { Box, Button, Text } from "theme-ui";
+import { Box, Heading, Button, Flex } from "theme-ui";
 import Screen from "../../../components/Screen";
+import { colorSchemes } from "../../../constants/color-schemes";
 import { useOnboarding } from "../useOnboardingContext";
 
-const ReviewScreen = () => {
+const TrainingTimeScreen = () => {
 	const { formValues, goToPreviousScreen } = useOnboarding();
+
+	const COLOR_SCHEME = colorSchemes.TRAINING_TIME;
 
 	const handleSubmit = () => {
 		const { log } = console;
@@ -13,16 +16,38 @@ const ReviewScreen = () => {
 
 	return (
 		<Screen>
-			<Text>
-				Would you like one of our authorDOCS experts to assist you with a
-				training session
-			</Text>
 			<Box>
-				<Button onClick={goToPreviousScreen}>Back</Button>
-				<Button onClick={handleSubmit}>Done</Button>
+				<Box sx={{ py: 3 }}>
+					<Heading as="h2" variant="headingSmall">
+						Would you lie one of our authorDOCS experts to assist you with a
+						training session?
+					</Heading>
+				</Box>
+				<Button
+					variant="smallButton"
+					sx={{ bg: "primary", color: COLOR_SCHEME, fontSize: 2 }}
+				>
+					Book a training time
+				</Button>
 			</Box>
+			<Flex>
+				<Button
+					variant="mediumGhost"
+					sx={{ width: "50%", mr: 3 }}
+					onClick={goToPreviousScreen}
+				>
+					Back
+				</Button>
+				<Button
+					variant="mediumGhost"
+					sx={{ width: "50%" }}
+					onClick={handleSubmit}
+				>
+					Done
+				</Button>
+			</Flex>
 		</Screen>
 	);
 };
 
-export default ReviewScreen;
+export default TrainingTimeScreen;

@@ -7,13 +7,15 @@ import GoalsScreen from "./screens/GoalsScreen";
 import FrustrationsScreen from "./screens/FrustrationsScreen";
 import TrainingTimeScreen from "./screens/TrainingTimeScreen";
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
+import { screenKeys } from "../../constants/screens";
+import { colorSchemes } from "../../constants/color-schemes";
 
 const orderedScreens = {
-	ROLE: RoleScreen,
-	REVIEW: ReviewScreen,
-	GOALS: GoalsScreen,
-	FRUSTRATIONS: FrustrationsScreen,
-	TRAINING_TIME: TrainingTimeScreen,
+	[screenKeys.ROLE]: RoleScreen,
+	[screenKeys.REVIEW]: ReviewScreen,
+	[screenKeys.GOALS]: GoalsScreen,
+	[screenKeys.FRUSTRATIONS]: FrustrationsScreen,
+	[screenKeys.TRAINING_TIME]: TrainingTimeScreen,
 };
 
 const orderedScreenKeys = R.keys(orderedScreens);
@@ -22,9 +24,31 @@ const OnboardingFlow = () => {
 	const { currentScreenId, goToIndex } = useOnboarding();
 	const CurrentScreen = orderedScreens[currentScreenId];
 
+	const colorScheme = colorSchemes[currentScreenId];
+
 	return (
-		<Box sx={{ bg: "#1a7ace" }}>
-			<Box sx={{ maxWidth: "600px", mx: "auto", px: 5, py: 6 }}>
+		<Flex
+			sx={{
+				bg: colorScheme,
+				transition: "background-color 500ms ease",
+				minHeight: "100vh",
+				width: "100%",
+				flexDirection: "column",
+			}}
+		>
+			<Flex
+				sx={{
+					maxWidth: "600px",
+					mx: "auto",
+					px: 5,
+					pt: 6,
+					pb: 4,
+					width: "100%",
+					flex: "1 1 100%",
+					flexDirection: "column",
+					height: "100%",
+				}}
+			>
 				<Flex sx={{ justifyContent: "center", mb: 4 }}>
 					{orderedScreenKeys.map((key) => (
 						<Button
@@ -47,8 +71,8 @@ const OnboardingFlow = () => {
 					<Heading color="white">Welcome</Heading>
 				</Box>
 				<CurrentScreen />
-			</Box>
-		</Box>
+			</Flex>
+		</Flex>
 	);
 };
 

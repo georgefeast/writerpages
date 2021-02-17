@@ -1,0 +1,7 @@
+export const screenKeys = {
+	ROLE: "ROLE",
+	REVIEW: "REVIEW",
+	GOALS: "GOALS",
+	FRUSTRATIONS: "FRUSTRATIONS",
+	TRAINING_TIME: "TRAINING_TIME",
+};

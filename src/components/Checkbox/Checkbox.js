@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import { jsx, Box, Flex } from "theme-ui";
 
-const Checkbox = ({ children, checked, ...rest }) => (
+const Checkbox = ({ children, checked, scheme, ...rest }) => (
 	<Box sx={{ display: "inline-block", width: "100%" }}>
 		<input
 			type="checkbox"
@@ -42,7 +42,7 @@ const Checkbox = ({ children, checked, ...rest }) => (
 					sx={{
 						borderRadius: "100%",
 						border: "1px solid",
-						borderColor: checked ? "primary" : "#fff",
+						borderColor: checked ? scheme : "#fff",
 						height: "16px",
 						width: "16px",
 						display: "inline-flex",
@@ -58,7 +58,7 @@ const Checkbox = ({ children, checked, ...rest }) => (
 							width: "10px",
 							height: "10px",
 							fill: "none",
-							stroke: checked ? "primary" : "#fff",
+							stroke: checked ? scheme : "#fff",
 							strokeWidth: "3px",
 							visibility: checked ? "visible" : "hidden",
 						}}
@@ -68,7 +68,7 @@ const Checkbox = ({ children, checked, ...rest }) => (
 				</Box>
 				<Box
 					sx={{
-						color: checked ? "primary" : "#fff",
+						color: checked ? scheme : "#fff",
 						flex: "1 1 100%",
 						mt: "1px",
 					}}
@@ -80,9 +80,14 @@ const Checkbox = ({ children, checked, ...rest }) => (
 	</Box>
 );
 
+Checkbox.defaultProps = {
+	scheme: "schemeA",
+};
+
 Checkbox.propTypes = {
 	children: PropTypes.node.isRequired,
 	checked: PropTypes.bool.isRequired,
+	scheme: PropTypes.oneOf(["schemeA", "schemeB", "schemeC", "schemeD"]),
 };
 
 export default Checkbox;

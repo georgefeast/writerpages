@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, Flex, Textarea, Label, Text } from "theme-ui";
+import { Box, Heading, Button, Flex, Label, Text, Textarea } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { useOnboarding } from "../useOnboardingContext";
-
-const FRUSTRATIONS_OPTIONS = {
-	FINDING_PARTS_TO_REVIEW: "Finding the parts of the contract I need to review",
-	MISSING_THINGS: "Missing things when reviewing documents",
-	FINDING_WORDING: "Finding the best working when drafting clauses",
-	CHECKING_DEFINITIONS:
-		"Checking definitions and cross references through the document",
-	STANDARDIZING_REVIEWS: "Standardizing reviews according to your playbook",
-	TAKES_TOO_LONG: "It takes too long",
-	NO_JUNIOR_TRAINING_TIME: "No time to train up juniors",
-	OTHER: "Other",
-};
+import Checkbox from "../../../components/Checkbox";
+import { colorSchemes } from "../../../constants/color-schemes";
+import { REVIEW_OPTIONS } from "../../../constants/options";
 
 const FIELD_NAME = "frustrations";
 const DETAIL_FIELD_NAME = `${FIELD_NAME}Detail`;
+const COLOR_SCHEME = colorSchemes.FRUSTRATIONS;
 
 const ReviewScreen = () => {
 	const {
@@ -34,6 +26,7 @@ const ReviewScreen = () => {
 		validateOnMount: true,
 		initialValues: {
 			[FIELD_NAME]: initialValue || [],
+			[DETAIL_FIELD_NAME]: "",
 		},
 	});
 
@@ -41,11 +34,15 @@ const ReviewScreen = () => {
 		onValues(values);
 	}, [onValues, values]);
 
-	const checkboxes = R.toPairs(FRUSTRATIONS_OPTIONS);
+	const checkboxes = R.toPairs(REVIEW_OPTIONS);
 
 	return (
 		<Screen>
-			<Text>What are your goals for when you use authorDOCS</Text>
+			<Box sx={{ py: 3 }}>
+				<Heading as="h2" variant="headingSmall">
+					What are your frustrations when you are looking at documents?
+				</Heading>
+			</Box>
 			<Box as="form" onSubmit={(e) => e.preventDefault()}>
 				<Flex mb={3} sx={{ flexDirection: "column" }}>
 					{checkboxes.map(([key, label]) => (
@@ -56,25 +53,54 @@ const ReviewScreen = () => {
 								checked={values[FIELD_NAME].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-							/>
-							{label}
+								scheme={COLOR_SCHEME}
+							>
+								<Text color="inherit">{label}</Text>
+							</Checkbox>
 						</Label>
 					))}
-					{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
-						<Textarea
-							name={DETAIL_FIELD_NAME}
-							onChange={handleChange}
+					<Label key="OTHER">
+						<Checkbox
+							name={FIELD_NAME}
+							value="OTHER"
+							checked={values[FIELD_NAME].indexOf("OTHER") > -1}
 							onBlur={handleBlur}
-							rows="6"
-							mb={3}
-						/>
-					) : null}
+							onChange={handleChange}
+							scheme={COLOR_SCHEME}
+						>
+							{values[FIELD_NAME].indexOf("OTHER") > -1 ? (
+								<Textarea
+									name={DETAIL_FIELD_NAME}
+									autoFocus
+									placeholder="Please give more detail"
+									onChange={handleChange}
+									onBlur={handleBlur}
+									rows="6"
+									mb={3}
+								/>
+							) : (
+								<Text color="inherit">Other</Text>
+							)}
+						</Checkbox>
+					</Label>
 				</Flex>
 			</Box>
-			<Box>
-				<Button onClick={goToPreviousScreen}>Back</Button>
-				<Button onClick={goToNextScreen}>Next</Button>
-			</Box>
+			<Flex>
+				<Button
+					variant="mediumGhost"
+					sx={{ width: "50%", mr: 3 }}
+					onClick={goToPreviousScreen}
+				>
+					Back
+				</Button>
+				<Button
+					variant="mediumGhost"
+					sx={{ width: "50%" }}
+					onClick={goToNextScreen}
+				>
+					Next
+				</Button>
+			</Flex>
 		</Screen>
 	);
 };

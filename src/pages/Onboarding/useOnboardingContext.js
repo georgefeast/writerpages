@@ -28,9 +28,7 @@ export const OnboardingProvider = ({
 	...rest
 }) => {
 	const getScreenIndex = useCallback(
-		(screenId) => {
-			orderedScreenKeys.indexOf(screenId);
-		},
+		(screenId) => orderedScreenKeys.indexOf(screenId),
 		[orderedScreenKeys],
 	);
 
@@ -43,14 +41,16 @@ export const OnboardingProvider = ({
 	const [formValues, setFormValues] = useState({});
 
 	const goToNextScreen = useCallback(() => {
-		const nextScreenId = getScreenIdByIndex(getScreenIndex(screen) + 1);
+		const currentScreenIndex = getScreenIndex(screen);
+		const nextScreenId = getScreenIdByIndex(currentScreenIndex + 1);
 		if (nextScreenId) {
 			setScreen(nextScreenId);
 		}
 	}, [getScreenIdByIndex, getScreenIndex, screen]);
 
 	const goToPreviousScreen = useCallback(() => {
-		const previousScreenId = getScreenIdByIndex(getScreenIndex(screen) - 1);
+		const currentScreenIndex = getScreenIndex(screen);
+		const previousScreenId = getScreenIdByIndex(currentScreenIndex - 1);
 		if (previousScreenId) {
 			setScreen(previousScreenId);
 		}
