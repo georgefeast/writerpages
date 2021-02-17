@@ -19,13 +19,6 @@ export default {
 			'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif',
 		monospace: "Menlo, monospace",
 	},
-	shadows: {
-		cardSmall: "0px 0px 9px rgba(0, 0, 0, 0.1)",
-		cardLarge: "0px 0px 18px rgba(0, 0, 0, 0.2)",
-		elementTiny: "0px 2px 4px rgba(0, 0, 0, 0.15)",
-		elementSmall: "0px 2px 8px rgba(0, 0, 0, 0.2)",
-		elementLarge: "0px 4px 18px rgba(0, 0, 0, 0.2)",
-	},
 	fontSizes: [8, 10, 12, 14, 16, 18, 20, 24, 32, 48, 64],
 	fontWeights: {
 		light: 300,
@@ -43,9 +36,6 @@ export default {
 		caps: "0.2em",
 	},
 	space: [0, 4, 8, 16, 24, 32, 64, 128, 256, 512],
-	widths: {
-		maxWidth: "100%",
-	},
 	forms: {
 		input: {
 			"::placeholder": {

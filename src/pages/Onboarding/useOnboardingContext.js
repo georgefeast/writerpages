@@ -27,6 +27,9 @@ export const OnboardingProvider = ({
 	orderedScreenKeys,
 	...rest
 }) => {
+	const [screen, setScreen] = useState(orderedScreenKeys[0]);
+	const [formValues, setFormValues] = useState({});
+
 	const getScreenIndex = useCallback(
 		(screenKey) => orderedScreenKeys.indexOf(screenKey),
 		[orderedScreenKeys],
@@ -36,9 +39,6 @@ export const OnboardingProvider = ({
 		(screenIndex) => orderedScreenKeys[screenIndex],
 		[orderedScreenKeys],
 	);
-
-	const [screen, setScreen] = useState(orderedScreenKeys[0]);
-	const [formValues, setFormValues] = useState({});
 
 	const hasCompletedScreen = useCallback(
 		(screenKey) =>
@@ -72,7 +72,6 @@ export const OnboardingProvider = ({
 	const value = useMemo(
 		() => ({
 			currentScreenKey: screen,
-			currentScreenIndex: getScreenIndex(screen),
 			goToNextScreen,
 			goToPreviousScreen,
 			goToKey: setScreen,

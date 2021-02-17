@@ -1,7 +1,10 @@
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Box, Heading, Button, Flex } from "theme-ui";
+import { Box, Heading, Text, Button, Flex } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { colorSchemes } from "../../../constants/color-schemes";
+import { screenKeys } from "../../../constants/screens";
 import { useOnboarding } from "../useOnboardingContext";
 
 const TrainingTimeScreen = () => {
@@ -10,7 +13,17 @@ const TrainingTimeScreen = () => {
 	const COLOR_SCHEME = colorSchemes.TRAINING_TIME;
 
 	const handleSubmit = () => {
-		alert(JSON.stringify(formValues));
+		const reqVariables = {
+			role: formValues[screenKeys.ROLE],
+			roleDetail: formValues[`${screenKeys.ROLE}_DETAIL`],
+			review: formValues[screenKeys.REVIEW],
+			reviewDetail: formValues[`${screenKeys.REVIEW}_DETAIL`],
+			goals: formValues[screenKeys.GOALS],
+			frustrations: formValues[screenKeys.FRUSTRATIONS],
+			frustrationsDetail: formValues[`${screenKeys.FRUSTRATIONS}_DETAIL`],
+		};
+		// eslint-disable-next-line no-alert
+		alert(JSON.stringify(reqVariables));
 	};
 
 	return (
@@ -29,7 +42,10 @@ const TrainingTimeScreen = () => {
 					variant="smallButton"
 					sx={{ bg: "primary", color: COLOR_SCHEME, fontSize: 2 }}
 				>
-					Book a training time
+					<FontAwesomeIcon icon={faCalendarAlt} />
+					<Text as="span" ml={2}>
+						Book a training time
+					</Text>
 				</Button>
 			</Box>
 			<Flex>
