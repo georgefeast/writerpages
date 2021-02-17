@@ -1,38 +1,13 @@
-import React, { useEffect, useState } from "react";
-import * as R from "ramda";
-import { useFormik } from "formik";
-import { Box, Heading, Button, Flex, Label, Text } from "theme-ui";
+import React from "react";
+import { Box, Heading, Button, Flex } from "theme-ui";
+import QuestionaireScreenForm from "../../../components/QuestionaireScreenForm";
 import Screen from "../../../components/Screen";
-import { useOnboarding } from "../useOnboardingContext";
-import Checkbox from "../../../components/Checkbox";
 import { colorSchemes } from "../../../constants/color-schemes";
 import { GOALS_OPTIONS } from "../../../constants/options";
-
-const FIELD_NAME = "goals";
-const COLOR_SCHEME = colorSchemes.GOALS;
+import { useOnboarding } from "../useOnboardingContext";
 
 const GoalsScreen = () => {
-	const {
-		formValues,
-		onValues,
-		goToPreviousScreen,
-		goToNextScreen,
-	} = useOnboarding();
-
-	const [initialValue] = useState(formValues[FIELD_NAME]);
-
-	const { values, handleBlur, handleChange } = useFormik({
-		validateOnMount: true,
-		initialValues: {
-			[FIELD_NAME]: initialValue || [],
-		},
-	});
-
-	useEffect(() => {
-		onValues(values);
-	}, [onValues, values]);
-
-	const checkboxes = R.toPairs(GOALS_OPTIONS);
+	const { goToNextScreen, goToPreviousScreen } = useOnboarding();
 
 	return (
 		<Screen>
@@ -42,25 +17,12 @@ const GoalsScreen = () => {
 						What are you goals for when you use authorDOCS?
 					</Heading>
 				</Box>
-				<Box as="form" onSubmit={(e) => e.preventDefault()}>
-					<Flex mb={3} sx={{ flexDirection: "column" }}>
-						{checkboxes.map(([key, label]) => (
-							<Label key={key}>
-								<Checkbox
-									name={FIELD_NAME}
-									value={key}
-									checked={values[FIELD_NAME].indexOf(key) > -1}
-									onBlur={handleBlur}
-									onChange={handleChange}
-									scheme={COLOR_SCHEME}
-								>
-									<Text color="inherit">{label}</Text>
-								</Checkbox>
-							</Label>
-						))}
-					</Flex>
-				</Box>
 			</Box>
+			<QuestionaireScreenForm
+				fieldName="goals"
+				options={GOALS_OPTIONS}
+				colorScheme={colorSchemes.GOALS}
+			/>
 			<Flex>
 				<Button
 					variant="mediumGhost"

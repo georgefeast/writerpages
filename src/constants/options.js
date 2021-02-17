@@ -9,6 +9,7 @@ export const ROLE_OPTIONS = {
 	PARALEGAL: "Paralegal",
 	PROCUREMENT_MANAGER: "Procurement manager",
 	SOLICITOR: "Solicitor",
+	OTHER: "Other",
 };
 
 export const REVIEW_OPTIONS = {

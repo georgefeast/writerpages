@@ -1,11 +1,13 @@
 import React from "react";
 import * as R from "ramda";
 import { Box, Flex, Button, Heading } from "theme-ui";
-import ReviewScreen from "./screens/ReviewScreen";
-import RoleScreen from "./screens/RoleScreen";
-import GoalsScreen from "./screens/GoalsScreen";
-import FrustrationsScreen from "./screens/FrustrationsScreen";
-import TrainingTimeScreen from "./screens/TrainingTimeScreen";
+import {
+	ReviewScreen,
+	RoleScreen,
+	GoalsScreen,
+	FrustrationsScreen,
+	TrainingTimeScreen,
+} from "./screens";
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
 import { screenKeys } from "../../constants/screens";
 import { colorSchemes } from "../../constants/color-schemes";
