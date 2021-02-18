@@ -10,8 +10,7 @@ const OnboardingScreenForm = ({ screenKey, options }) => {
 	const { formValues, onValues, currentColorScheme } = useOnboarding();
 
 	const detailFieldName = `${screenKey}_DETAIL`;
-	const acceptsOther = R.compose(R.indexOf("OTHER"), R.keys)(options);
-
+	const acceptsOther = R.compose(R.lt(0), R.indexOf("OTHER"), R.keys)(options);
 	const [initialValue] = useState(formValues[screenKey]);
 
 	const { values, handleBlur, handleChange } = useFormik({
