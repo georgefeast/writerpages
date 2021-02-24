@@ -5,7 +5,7 @@ import React, {
 	useCallback,
 	useMemo,
 } from "react";
-import * as R from "ramda";
+
 import PropTypes from "prop-types";
 import { colorSchemes } from "../../constants/color-schemes";
 
@@ -29,7 +29,6 @@ export const OnboardingProvider = ({
 	...rest
 }) => {
 	const [screen, setScreen] = useState(orderedScreenKeys[0]);
-	const [formValues, setFormValues] = useState({});
 
 	const getScreenIndex = useCallback(
 		(screenKey) => orderedScreenKeys.indexOf(screenKey),
@@ -40,6 +39,8 @@ export const OnboardingProvider = ({
 		(screenIndex) => orderedScreenKeys[screenIndex],
 		[orderedScreenKeys],
 	);
+
+	const formValues = {};
 
 	const hasCompletedScreen = useCallback(
 		(screenKey) =>
@@ -81,29 +82,20 @@ export const OnboardingProvider = ({
 		}
 	}, [getScreenKeyByIndex, getScreenIndex, screen]);
 
-	const mergeFormValues = useCallback(
-		R.compose(setFormValues, R.mergeLeft),
-		[],
-	);
-
 	const value = useMemo(
 		() => ({
 			currentScreenKey: screen,
 			goToNextScreen,
 			goToPreviousScreen,
 			goToKey,
-			onValues: mergeFormValues,
-			formValues,
 			hasCompletedCurrentScreen,
 			currentColorScheme,
 		}),
 		[
 			screen,
-			formValues,
 			goToNextScreen,
 			goToPreviousScreen,
 			goToKey,
-			mergeFormValues,
 			hasCompletedCurrentScreen,
 			currentColorScheme,
 		],
