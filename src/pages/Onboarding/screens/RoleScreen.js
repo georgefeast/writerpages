@@ -1,13 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Box, Heading, Button, Flex } from "theme-ui";
 import OnboardingScreenForm from "../../../components/OnboardingScreenForm";
 import Screen from "../../../components/Screen";
 import { ROLE_OPTIONS } from "../../../constants/options";
 import { screenKeys } from "../../../constants/screens";
-import { useOnboarding } from "../useOnboardingContext";
+import { incrementCurrentScreen } from "../../../redux/actions";
 
 const RoleScreen = () => {
-	const { goToNextScreen, hasCompletedCurrentScreen } = useOnboarding();
+	const dispatch = useDispatch();
 
 	return (
 		<Screen>
@@ -26,8 +27,8 @@ const RoleScreen = () => {
 				<Button
 					variant="mediumGhost"
 					sx={{ width: "100%" }}
-					onClick={goToNextScreen}
-					disabled={!hasCompletedCurrentScreen}
+					onClick={dispatch(incrementCurrentScreen)}
+					disabled={false}
 				>
 					Next
 				</Button>

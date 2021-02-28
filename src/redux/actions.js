@@ -1,8 +1,13 @@
-import { UPDATE_FORM_VALUES } from "./actionTypes";
+import { UPDATE_FORM_VALUES, INCREMENT_CURRENT_SCREEN } from "./actionTypes";
 
 export const updateFormValues = (values) => ({
 	type: UPDATE_FORM_VALUES,
 	payload: {
 		values,
 	},
+});
+
+export const incrementCurrentScreen = () => ({
+	type: INCREMENT_CURRENT_SCREEN,
+	payload: {},
 });

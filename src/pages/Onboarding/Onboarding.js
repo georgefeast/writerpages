@@ -1,6 +1,6 @@
 import React from "react";
-import * as R from "ramda";
 import { Box, Flex, Heading } from "theme-ui";
+import { useSelector } from "react-redux";
 import {
 	ReviewScreen,
 	RoleScreen,
@@ -9,22 +9,21 @@ import {
 	TrainingTimeScreen,
 } from "./screens";
 import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
-import { screenKeys } from "../../constants/screens";
 import NavigatorDot from "../../components/NavigatorDot";
 
-const orderedScreens = {
-	[screenKeys.ROLE]: RoleScreen,
-	[screenKeys.REVIEW]: ReviewScreen,
-	[screenKeys.GOALS]: GoalsScreen,
-	[screenKeys.FRUSTRATIONS]: FrustrationsScreen,
-	[screenKeys.TRAINING_TIME]: TrainingTimeScreen,
-};
-
-const orderedScreenKeys = R.keys(orderedScreens);
+const orderedScreens = [
+	RoleScreen,
+	ReviewScreen,
+	GoalsScreen,
+	FrustrationsScreen,
+	TrainingTimeScreen,
+];
 
 const OnboardingFlow = () => {
-	const { currentScreenKey, currentColorScheme, goToKey } = useOnboarding();
-	const CurrentScreen = orderedScreens[currentScreenKey];
+	const { currentColorScheme } = useOnboarding();
+
+	const currentScreenIndex = useSelector((state) => state.currentScreen);
+	const CurrentScreen = orderedScreens[currentScreenIndex];
 
 	return (
 		<Flex
@@ -50,11 +49,11 @@ const OnboardingFlow = () => {
 				}}
 			>
 				<Flex sx={{ justifyContent: "center", mb: 4 }}>
-					{orderedScreenKeys.map((key) => (
+					{orderedScreens.map((_, index) => (
 						<NavigatorDot
-							key={key}
-							onClick={() => goToKey(key)}
-							isActive={key === currentScreenKey}
+							key={`${index + 1}`}
+							onClick={() => {}}
+							isActive={index === currentScreenIndex}
 							mx={2}
 						/>
 					))}
@@ -71,7 +70,7 @@ const OnboardingFlow = () => {
 };
 
 const Onboarding = () => (
-	<OnboardingProvider orderedScreenKeys={orderedScreenKeys}>
+	<OnboardingProvider screensLength={orderedScreens.length}>
 		<OnboardingFlow />
 	</OnboardingProvider>
 );
