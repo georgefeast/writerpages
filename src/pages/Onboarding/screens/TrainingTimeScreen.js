@@ -1,17 +1,15 @@
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Heading, Text, Button, Flex } from "theme-ui";
 import Screen from "../../../components/Screen";
 import { screenKeys } from "../../../constants/screens";
-import { useOnboarding } from "../useOnboardingContext";
+import { decrementCurrentScreen } from "../../../redux/actions";
 
 const TrainingTimeScreen = () => {
-	const {
-		formValues,
-		goToPreviousScreen,
-		currentColorScheme,
-	} = useOnboarding();
+	const formValues = useSelector((state) => state.formValues);
+	const dispatch = useDispatch();
 
 	const handleSubmit = () => {
 		const reqVariables = {
@@ -41,7 +39,7 @@ const TrainingTimeScreen = () => {
 					href="https://www.onit.com/schedule-a-demo/"
 					target="_blank"
 					variant="smallButton"
-					sx={{ bg: "primary", color: currentColorScheme, fontSize: 2 }}
+					sx={{ bg: "primary", color: "schemeA", fontSize: 2 }}
 				>
 					<FontAwesomeIcon icon={faCalendarAlt} />
 					<Text as="span" ml={2}>
@@ -53,7 +51,7 @@ const TrainingTimeScreen = () => {
 				<Button
 					variant="mediumGhost"
 					sx={{ width: "50%", mr: 3 }}
-					onClick={goToPreviousScreen}
+					onClick={() => dispatch(decrementCurrentScreen())}
 				>
 					Back
 				</Button>

@@ -5,12 +5,9 @@ import * as R from "ramda";
 import { useFormik } from "formik";
 import { Box, Flex, Label, Text, Textarea } from "theme-ui";
 import Checkbox from "../Checkbox";
-import { useOnboarding } from "../../pages/Onboarding/useOnboardingContext";
 import { updateFormValues } from "../../redux/actions";
 
 const OnboardingScreenForm = ({ screenKey, options }) => {
-	const { currentColorScheme } = useOnboarding();
-
 	const formValues = useSelector((state) => state.formValues);
 
 	const detailFieldName = `${screenKey}_DETAIL`;
@@ -45,7 +42,7 @@ const OnboardingScreenForm = ({ screenKey, options }) => {
 								checked={values[screenKey].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-								scheme={currentColorScheme}
+								scheme="schemeA"
 							>
 								{values[screenKey].indexOf("OTHER") > -1 ? (
 									<Textarea
@@ -69,7 +66,7 @@ const OnboardingScreenForm = ({ screenKey, options }) => {
 								checked={values[screenKey].indexOf(key) > -1}
 								onBlur={handleBlur}
 								onChange={handleChange}
-								scheme={currentColorScheme}
+								scheme="schemeA"
 							>
 								<Text color="inherit">{label}</Text>
 							</Checkbox>

@@ -1,5 +1,9 @@
 import * as R from "ramda";
-import { UPDATE_FORM_VALUES, INCREMENT_CURRENT_SCREEN } from "./actionTypes";
+import {
+	UPDATE_FORM_VALUES,
+	INCREMENT_CURRENT_SCREEN,
+	DECREMENT_CURRENT_SCREEN,
+} from "./actionTypes";
 
 export const rootReducer = (
 	state = { formValues: {}, currentScreen: 0 },
@@ -17,6 +21,12 @@ export const rootReducer = (
 			return {
 				...state,
 				currentScreen: state.currentScreen + 1,
+			};
+		}
+		case DECREMENT_CURRENT_SCREEN: {
+			return {
+				...state,
+				currentScreen: state.currentScreen - 1,
 			};
 		}
 		default:

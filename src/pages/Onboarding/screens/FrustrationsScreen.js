@@ -1,17 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Box, Heading, Button, Flex } from "theme-ui";
 import OnboardingScreenForm from "../../../components/OnboardingScreenForm";
 import Screen from "../../../components/Screen";
 import { FRUSTRATIONS_OPTIONS } from "../../../constants/options";
 import { screenKeys } from "../../../constants/screens";
-import { useOnboarding } from "../useOnboardingContext";
+import {
+	decrementCurrentScreen,
+	incrementCurrentScreen,
+} from "../../../redux/actions";
 
 const FrustrationsScreen = () => {
-	const {
-		goToNextScreen,
-		goToPreviousScreen,
-		hasCompletedCurrentScreen,
-	} = useOnboarding();
+	const dispatch = useDispatch();
 
 	return (
 		<Screen>
@@ -30,15 +30,15 @@ const FrustrationsScreen = () => {
 				<Button
 					variant="mediumGhost"
 					sx={{ width: "50%", mr: 3 }}
-					onClick={goToPreviousScreen}
+					onClick={() => dispatch(decrementCurrentScreen())}
 				>
 					Back
 				</Button>
 				<Button
 					variant="mediumGhost"
 					sx={{ width: "50%" }}
-					onClick={goToNextScreen}
-					disabled={!hasCompletedCurrentScreen}
+					onClick={() => dispatch(incrementCurrentScreen())}
+					disabled={false}
 				>
 					Next
 				</Button>

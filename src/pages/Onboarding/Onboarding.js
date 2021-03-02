@@ -8,7 +8,7 @@ import {
 	FrustrationsScreen,
 	TrainingTimeScreen,
 } from "./screens";
-import { OnboardingProvider, useOnboarding } from "./useOnboardingContext";
+
 import NavigatorDot from "../../components/NavigatorDot";
 
 const orderedScreens = [
@@ -20,15 +20,13 @@ const orderedScreens = [
 ];
 
 const OnboardingFlow = () => {
-	const { currentColorScheme } = useOnboarding();
-
 	const currentScreenIndex = useSelector((state) => state.currentScreen);
 	const CurrentScreen = orderedScreens[currentScreenIndex];
 
 	return (
 		<Flex
 			sx={{
-				bg: currentColorScheme,
+				bg: "schemeA",
 				transition: "background-color 500ms ease",
 				minHeight: "100vh",
 				width: "100%",
@@ -69,10 +67,6 @@ const OnboardingFlow = () => {
 	);
 };
 
-const Onboarding = () => (
-	<OnboardingProvider screensLength={orderedScreens.length}>
-		<OnboardingFlow />
-	</OnboardingProvider>
-);
+const Onboarding = () => <OnboardingFlow />;
 
 export default Onboarding;

@@ -27,7 +27,7 @@ const RoleScreen = () => {
 				<Button
 					variant="mediumGhost"
 					sx={{ width: "100%" }}
-					onClick={dispatch(incrementCurrentScreen)}
+					onClick={() => dispatch(incrementCurrentScreen())}
 					disabled={false}
 				>
 					Next
