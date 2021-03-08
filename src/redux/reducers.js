@@ -3,6 +3,7 @@ import {
 	UPDATE_FORM_VALUES,
 	INCREMENT_CURRENT_SCREEN,
 	DECREMENT_CURRENT_SCREEN,
+	NAVIGATE_TO_SCREEN,
 } from "./actionTypes";
 
 export const rootReducer = (
@@ -27,6 +28,13 @@ export const rootReducer = (
 			return {
 				...state,
 				currentScreen: state.currentScreen - 1,
+			};
+		}
+		case NAVIGATE_TO_SCREEN: {
+			const { screenIndex } = action.payload;
+			return {
+				...state,
+				currentScreen: screenIndex,
 			};
 		}
 		default:

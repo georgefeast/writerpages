@@ -1,6 +1,7 @@
 import React from "react";
+import * as R from "ramda";
 import { Box, Flex, Heading } from "theme-ui";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	ReviewScreen,
 	RoleScreen,
@@ -10,23 +11,32 @@ import {
 } from "./screens";
 
 import NavigatorDot from "../../components/NavigatorDot";
+import { screenKeys } from "../../constants/screens";
+import { colorSchemes } from "../../constants/color-schemes";
+import { navigateToScreen } from "../../redux/actions";
 
-const orderedScreens = [
-	RoleScreen,
-	ReviewScreen,
-	GoalsScreen,
-	FrustrationsScreen,
-	TrainingTimeScreen,
-];
+const orderedScreens = {
+	[screenKeys.ROLE]: RoleScreen,
+	[screenKeys.REVIEW]: ReviewScreen,
+	[screenKeys.GOALS]: GoalsScreen,
+	[screenKeys.FRUSTRATIONS]: FrustrationsScreen,
+	[screenKeys.TRAINING_TIME]: TrainingTimeScreen,
+};
 
 const OnboardingFlow = () => {
 	const currentScreenIndex = useSelector((state) => state.currentScreen);
-	const CurrentScreen = orderedScreens[currentScreenIndex];
+	const orderedScreenKeys = R.keys(orderedScreens);
+	const currentScreenKey = orderedScreenKeys[currentScreenIndex];
+
+	const dispatch = useDispatch();
+
+	const CurrentScreen = orderedScreens[currentScreenKey];
+	const colorScheme = colorSchemes[currentScreenKey];
 
 	return (
 		<Flex
 			sx={{
-				bg: "schemeA",
+				bg: colorScheme,
 				transition: "background-color 500ms ease",
 				minHeight: "100vh",
 				width: "100%",
@@ -47,10 +57,10 @@ const OnboardingFlow = () => {
 				}}
 			>
 				<Flex sx={{ justifyContent: "center", mb: 4 }}>
-					{orderedScreens.map((_, index) => (
+					{orderedScreenKeys.map((key, index) => (
 						<NavigatorDot
-							key={`${index + 1}`}
-							onClick={() => {}}
+							key={key}
+							onClick={() => dispatch(navigateToScreen(index))}
 							isActive={index === currentScreenIndex}
 							mx={2}
 						/>

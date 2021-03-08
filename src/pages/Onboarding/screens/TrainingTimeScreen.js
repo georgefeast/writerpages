@@ -4,12 +4,16 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Heading, Text, Button, Flex } from "theme-ui";
 import Screen from "../../../components/Screen";
+import { colorSchemes } from "../../../constants/color-schemes";
 import { screenKeys } from "../../../constants/screens";
 import { decrementCurrentScreen } from "../../../redux/actions";
+
+const SCREEN_KEY = screenKeys.TRAINING_TIME;
 
 const TrainingTimeScreen = () => {
 	const formValues = useSelector((state) => state.formValues);
 	const dispatch = useDispatch();
+	const colorScheme = colorSchemes[SCREEN_KEY];
 
 	const handleSubmit = () => {
 		const reqVariables = {
@@ -39,7 +43,7 @@ const TrainingTimeScreen = () => {
 					href="https://www.onit.com/schedule-a-demo/"
 					target="_blank"
 					variant="smallButton"
-					sx={{ bg: "primary", color: "schemeA", fontSize: 2 }}
+					sx={{ bg: "primary", color: colorScheme, fontSize: 2 }}
 				>
 					<FontAwesomeIcon icon={faCalendarAlt} />
 					<Text as="span" ml={2}>

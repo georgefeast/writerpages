@@ -9,9 +9,14 @@ import {
 	decrementCurrentScreen,
 	incrementCurrentScreen,
 } from "../../../redux/actions";
+import useIsScreenCompleted from "../../../redux/useIsScreenCompleted";
+
+const SCREEN_KEY = screenKeys.GOALS;
 
 const GoalsScreen = () => {
 	const dispatch = useDispatch();
+	const isValid = useIsScreenCompleted(SCREEN_KEY);
+
 	return (
 		<Screen>
 			<Box>
@@ -20,10 +25,7 @@ const GoalsScreen = () => {
 						What are you goals for when you use writerPAGES?
 					</Heading>
 				</Box>
-				<OnboardingScreenForm
-					screenKey={screenKeys.GOALS}
-					options={GOALS_OPTIONS}
-				/>
+				<OnboardingScreenForm screenKey={SCREEN_KEY} options={GOALS_OPTIONS} />
 			</Box>
 			<Flex>
 				<Button
@@ -37,7 +39,7 @@ const GoalsScreen = () => {
 					variant="mediumGhost"
 					sx={{ width: "50%" }}
 					onClick={() => dispatch(incrementCurrentScreen())}
-					disabled={false}
+					disabled={!isValid}
 				>
 					Next
 				</Button>

@@ -2,6 +2,7 @@ import {
 	UPDATE_FORM_VALUES,
 	INCREMENT_CURRENT_SCREEN,
 	DECREMENT_CURRENT_SCREEN,
+	NAVIGATE_TO_SCREEN,
 } from "./actionTypes";
 
 export const updateFormValues = (values) => ({
@@ -19,4 +20,9 @@ export const incrementCurrentScreen = () => ({
 export const decrementCurrentScreen = () => ({
 	type: DECREMENT_CURRENT_SCREEN,
 	payload: {},
+});
+
+export const navigateToScreen = (index) => ({
+	type: NAVIGATE_TO_SCREEN,
+	payload: { screenIndex: index },
 });

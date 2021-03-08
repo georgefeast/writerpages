@@ -9,9 +9,14 @@ import {
 	incrementCurrentScreen,
 	decrementCurrentScreen,
 } from "../../../redux/actions";
+import useIsScreenCompleted from "../../../redux/useIsScreenCompleted";
+
+const SCREEN_KEY = screenKeys.REVIEW;
 
 const ReviewScreen = () => {
 	const dispatch = useDispatch();
+	const isValid = useIsScreenCompleted(SCREEN_KEY);
+
 	return (
 		<Screen>
 			<Box>
@@ -20,10 +25,7 @@ const ReviewScreen = () => {
 						What types of review do you do?
 					</Heading>
 				</Box>
-				<OnboardingScreenForm
-					screenKey={screenKeys.REVIEW}
-					options={REVIEW_OPTIONS}
-				/>
+				<OnboardingScreenForm screenKey={SCREEN_KEY} options={REVIEW_OPTIONS} />
 			</Box>
 			<Flex>
 				<Button
@@ -37,7 +39,7 @@ const ReviewScreen = () => {
 					variant="mediumGhost"
 					sx={{ width: "50%" }}
 					onClick={() => dispatch(incrementCurrentScreen())}
-					disabled={false}
+					disabled={!isValid}
 				>
 					Next
 				</Button>

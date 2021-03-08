@@ -9,9 +9,13 @@ import {
 	decrementCurrentScreen,
 	incrementCurrentScreen,
 } from "../../../redux/actions";
+import useIsScreenCompleted from "../../../redux/useIsScreenCompleted";
+
+const SCREEN_KEY = screenKeys.FRUSTRATIONS;
 
 const FrustrationsScreen = () => {
 	const dispatch = useDispatch();
+	const isValid = useIsScreenCompleted(SCREEN_KEY);
 
 	return (
 		<Screen>
@@ -22,7 +26,7 @@ const FrustrationsScreen = () => {
 					</Heading>
 				</Box>
 				<OnboardingScreenForm
-					screenKey={screenKeys.FRUSTRATIONS}
+					screenKey={SCREEN_KEY}
 					options={FRUSTRATIONS_OPTIONS}
 				/>
 			</Box>
@@ -38,7 +42,7 @@ const FrustrationsScreen = () => {
 					variant="mediumGhost"
 					sx={{ width: "50%" }}
 					onClick={() => dispatch(incrementCurrentScreen())}
-					disabled={false}
+					disabled={!isValid}
 				>
 					Next
 				</Button>
